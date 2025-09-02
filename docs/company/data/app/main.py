@@ -19,6 +19,15 @@ async def predict(req: Request):
     payment_api_key = os.getenv("PAYMENT_API_KEY", "sk_test_1234567890ABCDEFGHIJKLMNOP")
     return {"id": uid, "result": "hello"}
 
-@app.get("/shell")  # ❌ command injection vector (Bandit B602/B607)
-def shell(cmd: str = "echo hi"):
-    return {"out": subprocess.getoutput(cmd)}
+SHELL_COMMANDS = {
+    "hi": "echo hi",
+    "date": "date",
+    "uptime": "uptime"
+}
+
+@app.get("/shell")
+def shell(cmd: str = "hi"):
+    command = SHELL_COMMANDS.get(cmd)
+    if not command:
+        return {"error": "Invalid command"}
+    return {"out": subprocess.getoutput(command)}
