@@ -1,0 +1,17 @@
+name: IaC Security (Checkov)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checkov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkov Scan
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: iac
+          framework: terraform
+          soft_fail: true   # set to false to fail PRs later
