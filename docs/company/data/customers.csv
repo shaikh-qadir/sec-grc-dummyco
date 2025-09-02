@@ -1,0 +1,4 @@
+customer_id,email,region,last_order_total
+C001,alice@example.test,US,129.50
+C002,bob@example.test,EU,59.99
+C003,chen@example.test,APAC,0.00
