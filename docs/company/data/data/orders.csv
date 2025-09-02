@@ -1,0 +1,4 @@
+order_id,customer_id,amount,status
+O1001,C001,129.50,paid
+O1002,C002,59.99,refunded
+O1003,C003,0.00,cart
